@@ -8,12 +8,17 @@ const volumeDownBtn = document.querySelector(".volume-down-fill");
 const volumeUpBtn = document.querySelector(".volume-up-fill");
 const volumeSlider = document.querySelector('input[type = "range"]');
 // video controls
+const videoContainer = document.querySelector("#video-container");
 const videoPlayer = document.querySelector("#video");
 const videoControls = document.querySelector("#video-controls");
 const currentTime = document.querySelector("#current-time");
 const videoDuration = document.querySelector("#video-duration");
 const skipForward = document.querySelector("#skip-forward");
 const skipRewind = document.querySelector("#skip-rewind");
+// screen controls
+const fullscreenBtn = document.querySelector("#fullscreen");
+const miniPlayerBtn = document.querySelector("#picture-in-picture");
+const aspectRatioBtn = document.querySelector("#aspect-ratio");
 
 // initial state
 title.textContent = "Ice Age - fox_family.mp4";
@@ -28,24 +33,25 @@ volumeDownBtn.classList.add("hidden");
  */
 
 document.body.addEventListener("keypress", (e) => {
-  switch (e.code.toLowerCase()) {
-    case "space":
+  console.log(e.key.toLocaleLowerCase());
+  switch (e.key.toLowerCase()) {
+    case " ":
       togglePlay();
       break;
 
-    case "keyf":
+    case "f":
       maxScreen();
       break;
 
-    case "keyt":
+    case "t":
       miniPlayer();
       break;
 
-    case "keyw":
+    case "w":
       wideScreen();
       break;
 
-    case "keym":
+    case "m":
       toggleMute();
       break;
 
@@ -93,7 +99,13 @@ volumeSlider.addEventListener("input", (e) => {
 
 const toggleMute = () => {
   video.muted = !video.muted;
-  volumeSlider.value = video.volume;
+  if (video.muted) {
+    volumeSlider.value = 0;
+    showVolumeIcons(0);
+  } else {
+    volumeSlider.value = video.volume;
+    showVolumeIcons(video.volume);
+  }
 };
 
 volumeMuteBtn.addEventListener("click", () => {
@@ -174,3 +186,31 @@ skipForward.addEventListener("click", () => {
 skipRewind.addEventListener("click", () => {
   skip(-5);
 });
+
+/**
+ * Screen functions
+ */
+
+const maxScreen = () => {
+  document.fullscreenElement
+    ? document.exitFullscreen()
+    : videoContainer.requestFullscreen();
+};
+
+fullscreenBtn.addEventListener("click", maxScreen);
+
+const wideScreen = () => {
+  videoContainer.classList.toggle("wide-screen-mode");
+
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+};
+
+aspectRatioBtn.addEventListener("click", wideScreen);
+
+const miniPlayer = () => {
+  video.requestPictureInPicture();
+};
+
+miniPlayerBtn.addEventListener("click", miniPlayer);

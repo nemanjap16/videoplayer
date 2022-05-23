@@ -13,10 +13,7 @@
     <h1 class="text-white text-3xl uppercase mt-[50px] mb-[50px]">
       Videoplayer
     </h1>
-    <div
-      id="video-container"
-      class="relative bg-black group border-4 border-solid border-slate-900"
-    >
+    <div id="video-container" class="relative bg-black group">
       <p id="title" class="absolute title"></p>
       <video
         id="video"
@@ -157,6 +154,7 @@
           <div id="screen-controls" class="flex space-x-4 ml-auto">
             <span>
               <svg
+                id="picture-in-picture"
                 class="picture-in-picture w-7 h-7"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -174,6 +172,7 @@
             </span>
             <span>
               <svg
+                id="aspect-ratio"
                 class="aspect-ratio w-7 h-7"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -191,6 +190,7 @@
             </span>
             <span>
               <svg
+                id="fullscreen"
                 class="fullscreen w-7 h-7 p-1"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

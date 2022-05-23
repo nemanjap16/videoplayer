@@ -5,6 +5,12 @@
 @layer base {
   #video-container {
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    width: 50%;
+  }
+
+  video {
+    display: block;
+    width: 100%;
   }
 
   h1 {
@@ -20,5 +26,10 @@
 
   .video-controls {
     @apply bottom-0 w-full bg-slate-900 text-white flex flex-col gap-3 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  }
+
+  .wide-screen-mode {
+    width: 70% !important;
+    height: auto;
   }
 }
