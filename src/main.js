@@ -10,6 +10,10 @@ const volumeSlider = document.querySelector('input[type = "range"]');
 // video controls
 const videoPlayer = document.querySelector("#video");
 const videoControls = document.querySelector("#video-controls");
+const currentTime = document.querySelector("#current-time");
+const videoDuration = document.querySelector("#video-duration");
+const skipForward = document.querySelector("#skip-forward");
+const skipRewind = document.querySelector("#skip-rewind");
 
 // initial state
 title.textContent = "Ice Age - fox_family.mp4";
@@ -131,4 +135,42 @@ playBtn.addEventListener("click", () => {
 
 pauseBtn.addEventListener("click", () => {
   togglePlay();
+});
+
+/**
+ * Display video duration
+ */
+
+const zeroFormatter = Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 });
+
+const format = (d) => {
+  d = Number(d);
+  let h = Math.floor(d / 3600);
+  let m = Math.floor((d % 3600) / 60);
+  let s = Math.floor((d % 3600) % 60);
+
+  if (h == 0) {
+    return `${m}:${zeroFormatter.format(s)}`;
+  } else {
+    return `${h}:${zeroFormatter.format(m)}:${zeroFormatter.format(s)}`;
+  }
+};
+
+video.addEventListener("timeupdate", () => {
+  currentTime.textContent = format(video.currentTime);
+});
+
+video.addEventListener("loadeddata", () => {
+  videoDuration.textContent = format(video.duration);
+});
+
+const skip = (d) => {
+  video.currentTime += d;
+};
+
+skipForward.addEventListener("click", () => {
+  skip(5);
+});
+skipRewind.addEventListener("click", () => {
+  skip(-5);
 });

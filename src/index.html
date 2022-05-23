@@ -56,10 +56,16 @@
               </svg>
             </span>
           </div>
-          <div id="skip" class="flex space-x-2">
+          <div id="video-details" class="flex items-center space-x-1">
+            <div id="current-time">0:00</div>
+            <span>/</span>
+            <div id="video-duration">0:00</div>
+          </div>
+          <div id="skip" class="flex items-center space-x-2">
             <span>
               <svg
-                class="skip-start-fill w-7 h-7"
+                id="skip-rewind"
+                class="skip-start-fill w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -74,7 +80,8 @@
             <span>5s</span>
             <span>
               <svg
-                class="skip-end-fill w-7 h-7"
+                id="skip-forward"
+                class="skip-end-fill w-5 h-5"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"

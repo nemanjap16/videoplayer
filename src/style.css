@@ -15,7 +15,7 @@
 
 @layer components {
   .title {
-    @apply top-3 left-3 text-white text-xl z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100;
+    @apply top-3 left-3 text-white text-base z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100;
   }
 
   .video-controls {
