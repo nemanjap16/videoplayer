@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  #video-container {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  }
+
+  h1 {
+    text-shadow: 2px 2px 2px #ff0000;
+    font-weight: bold;
+  }
+}
+
+@layer components {
+  .title {
+    @apply top-3 left-3 text-white text-xl z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100;
+  }
+
+  .video-controls {
+    @apply bottom-0 w-full bg-slate-900 text-white flex flex-col gap-3 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  }
+}
