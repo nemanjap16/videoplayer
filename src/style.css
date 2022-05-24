@@ -5,7 +5,8 @@
 @layer base {
   #video-container {
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    width: 50%;
+    max-width: 700px;
+    width: 100%;
   }
 
   video {
@@ -14,8 +15,13 @@
   }
 
   h1 {
-    text-shadow: 2px 2px 2px #ff0000;
+    text-shadow: 2px 2px 2px #000;
     font-weight: bold;
+  }
+
+  input {
+    outline: none;
+    border: none;
   }
 }
 
@@ -29,7 +35,16 @@
   }
 
   .wide-screen-mode {
-    width: 70% !important;
+    max-width: 1100px !important;
     height: auto;
+  }
+
+  .timeline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: calc(100% - var(--progress) * 100%);
+    background-color: orange;
   }
 }

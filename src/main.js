@@ -15,10 +15,16 @@ const currentTime = document.querySelector("#current-time");
 const videoDuration = document.querySelector("#video-duration");
 const skipForward = document.querySelector("#skip-forward");
 const skipRewind = document.querySelector("#skip-rewind");
+const reload = document.querySelector("#reload");
 // screen controls
 const fullscreenBtn = document.querySelector("#fullscreen");
 const miniPlayerBtn = document.querySelector("#picture-in-picture");
 const aspectRatioBtn = document.querySelector("#aspect-ratio");
+// progress bar
+const progresBar = document.querySelector("#progress-bar");
+const timeline = document.querySelector("#timeline");
+// playback speed
+const speedBtn = document.querySelector("#playback-speed");
 
 // initial state
 title.textContent = "Ice Age - fox_family.mp4";
@@ -32,8 +38,7 @@ volumeDownBtn.classList.add("hidden");
  * Keyboard events
  */
 
-document.body.addEventListener("keypress", (e) => {
-  console.log(e.key.toLocaleLowerCase());
+document.body.onkeydown = (e) => {
   switch (e.key.toLowerCase()) {
     case " ":
       togglePlay();
@@ -63,7 +68,7 @@ document.body.addEventListener("keypress", (e) => {
       skip(-5);
       break;
   }
-});
+};
 
 /**
  * Volume functions
@@ -170,11 +175,16 @@ const format = (d) => {
 
 video.addEventListener("timeupdate", () => {
   currentTime.textContent = format(video.currentTime);
+  handleTimelineUpdate();
 });
 
 video.addEventListener("loadeddata", () => {
   videoDuration.textContent = format(video.duration);
 });
+
+/**
+ * Skip forward/rewind
+ */
 
 const skip = (d) => {
   video.currentTime += d;
@@ -214,3 +224,39 @@ const miniPlayer = () => {
 };
 
 miniPlayerBtn.addEventListener("click", miniPlayer);
+
+/**
+ * Reload video
+ */
+
+const reloadVideo = () => {
+  video.pause();
+  video.load();
+  video.play();
+};
+
+reload.addEventListener("click", reloadVideo);
+
+/**
+ * Playback speed
+ */
+
+const playbackSpeed = () => {
+  let newPlaybackSpeed = video.playbackRate + 0.25;
+  if (newPlaybackSpeed > 2) newPlaybackSpeed = 0.25;
+  video.playbackRate = newPlaybackSpeed;
+  speedBtn.textContent = `${newPlaybackSpeed}x`;
+};
+
+speedBtn.addEventListener("click", playbackSpeed);
+
+/**
+ * Progress bar
+ */
+
+// timeline.addEventListener("");
+
+function handleTimelineUpdate(e) {
+  const percent = video.currentTime / video.duration;
+  timeline.style.setProperty("--progress", percent);
+}
