@@ -21,7 +21,7 @@ const fullscreenBtn = document.querySelector("#fullscreen");
 const miniPlayerBtn = document.querySelector("#picture-in-picture");
 const aspectRatioBtn = document.querySelector("#aspect-ratio");
 // progress bar
-const progresBar = document.querySelector("#progress-bar");
+const progressBar = document.querySelector("#progress-bar");
 const timeline = document.querySelector("#timeline");
 // playback speed
 const speedBtn = document.querySelector("#playback-speed");
@@ -173,6 +173,11 @@ const format = (d) => {
   }
 };
 
+const handleTimelineUpdate = () => {
+  const percent = video.currentTime / video.duration;
+  timeline.style.setProperty("--progress", percent);
+};
+
 video.addEventListener("timeupdate", () => {
   currentTime.textContent = format(video.currentTime);
   handleTimelineUpdate();
@@ -254,9 +259,9 @@ speedBtn.addEventListener("click", playbackSpeed);
  * Progress bar
  */
 
-// timeline.addEventListener("");
+const scrubbing = (e) => {
+  const updateTime = (e.offsetX / progressBar.offsetWidth) * video.duration;
+  video.currentTime = updateTime;
+};
 
-function handleTimelineUpdate(e) {
-  const percent = video.currentTime / video.duration;
-  timeline.style.setProperty("--progress", percent);
-}
+progressBar.addEventListener("click", scrubbing);
